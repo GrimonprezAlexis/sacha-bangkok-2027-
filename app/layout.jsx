@@ -1,38 +1,42 @@
 import "./globals.css";
-import { TabBar } from "@/components/Ui";
+import "./extra.css";
+import { Cormorant_Garamond, Manrope } from "next/font/google";
+
+const display = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-display",
+});
+
+const body = Manrope({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-body",
+});
 
 export const metadata = {
-  title: "Bangkok Watthana · 4 → 7 janvier 2027",
-  description: "Programme, restos, transports et bons plans à Bangkok.",
-  manifest: "/manifest.webmanifest",
+  title: "Bangkok Watthana · 4 → 7 janv.",
+  description: "Bangkok : programme jour par jour, carte, restos, nuit et infos pratiques.",
   appleWebApp: { capable: true, title: "Bangkok", statusBarStyle: "black-translucent" },
+  manifest: "/manifest.webmanifest",
 };
 
 export const viewport = {
+  themeColor: "#fbf5ee",
   width: "device-width",
   initialScale: 1,
+  maximumScale: 1,
   viewportFit: "cover",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f6f4ef" },
-    { media: "(prefers-color-scheme: dark)", color: "#0e1116" },
-  ],
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="fr">
+    <html lang="fr" className={`${display.variable} ${body.variable}`}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
       </head>
-      <body>
-        <main>{children}</main>
-        <TabBar />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
